@@ -12,19 +12,16 @@ class HangmanCanvas {
 
   drawLines() {
     // ... your code goes here
+    let x = 300
 
-    hangman.secretWord
-    
-    this.context.beginPath()
-    // hangman.moveTo(500,700)
-    // hangman.lineTo(250, 50);
-    // hangman.stroke();
-    this.context.moveTo(250, 50);
-// draw the line that has final coordinates x=250, y=100
-this.context.lineTo(250, 100);
-// .stroke() executes the drawing
-this.context.stroke();
-
+    for(let i=0 ; i< hangman.secretWord.length ; i++){
+      this.context.beginPath() ;
+      this.context.moveTo(x, 700) ;
+      this.context.lineTo(x+50, 700) ;
+      this.context.closePath ;
+      this.context.stroke() ;
+      x += 75;
+    }
   }
 
   writeCorrectLetter(index) {
