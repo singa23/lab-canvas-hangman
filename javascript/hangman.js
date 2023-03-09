@@ -70,26 +70,29 @@ let hangman;
 
 const startGameButton = document.getElementById('start-game-button');
 
-startGameButton && startGameButton.addEventListener('click', event => {
+if (startGameButton) {
+  startGameButton.addEventListener('click', event => {
   // l'objet hangman c'est la nouvelle partie
   hangman = new Hangman(['node', 'javascript', 'react', 'miami', 'paris', 'amsterdam', 'lisboa']);
   console.log('secretWord', hangman.secretWord);
-
-  // HINT (uncomment when start working on the canvas portion of the lab)
-  // zone de dessin
-  hangmanCanvas = new HangmanCanvas(); // { createBoard: f(), ... }
-  hangmanCanvas.createBoard()
-  // ... your code goes here
-});
+  
+    // HINT (uncomment when start working on the canvas portion of the lab)
+    // zone de dessin
+    hangman.secretWord = hangman.pickWord();
+    hangmanCanvas = new HangmanCanvas(hangman.secretWord);
+    hangmanCanvas.createBoard()
+    // ... your code goes here
+  });
+} 
 
 document.addEventListener('keydown', event => {
   // React to user pressing a key
   // ... your code goes here
-  console.log(event.key)
+  console.log(event.keyCode)
 
-  if (hangman.checkIfLetter(event.key)) {
+  if (hangman.checkIfLetter(event.keyCode)) {
     // WOOT: this is a [a-z] letter
-    const letter = event.key;
+    const letter = event.keyCode;
 
     if (hangman.checkClickedLetters(letter)) {
       // New letter
